@@ -1,0 +1,252 @@
+.footer {
+  background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+  border-top: 2px solid #FFD700;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #FFD700, transparent);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  padding: 60px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: #FFD700;
+  font-weight: 400;
+  letter-spacing: 3px;
+  margin-bottom: 0;
+}
+
+.footer-tagline {
+  color: #cccccc;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.footer-quote {
+  padding: 25px 0;
+  border-left: 3px solid #FFD700;
+  padding-left: 25px;
+  background: rgba(255, 215, 0, 0.05);
+  margin: 20px 0;
+}
+
+.footer-quote p {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.3rem;
+  color: #ffffff;
+  font-style: italic;
+  margin: 0;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.link-column h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: #FFD700;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+.link-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.link-column li {
+  margin-bottom: 12px;
+}
+
+.link-column a {
+  color: #999999;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+  display: block;
+  padding: 5px 0;
+}
+
+.link-column a:hover {
+  color: #ffffff;
+  padding-left: 10px;
+}
+
+.footer-bottom {
+  padding: 40px 0;
+}
+
+.footer-principles {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+.principle-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.principle-icon {
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+.principle-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+.footer-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+  margin: 40px 0;
+}
+
+.footer-final {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.copyright {
+  color: #666666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footer-motto {
+  margin: 0;
+}
+
+.footer-motto p {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  color: #FFD700;
+  margin: 0;
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+
+/* Mobile Responsive */
+@media (max-width: 968px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    text-align: center;
+  }
+  
+  .footer-brand {
+    align-items: center;
+  }
+  
+  .footer-tagline {
+    max-width: 100%;
+  }
+  
+  .footer-quote {
+    border-left: none;
+    border-top: 3px solid #FFD700;
+    padding-left: 0;
+    padding-top: 25px;
+    text-align: center;
+  }
+  
+  .footer-links {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  
+  .footer-final {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  
+  .footer-principles {
+    gap: 40px;
+  }
+  
+  .principle-icon {
+    font-size: 1.5rem;
+  }
+  
+  .principle-text {
+    font-size: 0.9rem;
+  }
+  
+  .footer-logo {
+    font-size: 2rem;
+  }
+  
+  .footer-quote p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-content {
+    padding: 40px 0;
+  }
+  
+  .footer-principles {
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .footer-tagline {
+    font-size: 1rem;
+  }
+  
+  .footer-motto p {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  
+  .copyright {
+    font-size: 0.8rem;
+  }
+}

@@ -1,45 +1,45 @@
 import React from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './CTA.css';
 
 const CTA = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="cta section">
       <div className="container">
         <div className="cta-content">
           <div className="cta-text">
             <h2 className="cta-title">
-              YOUR LEGACY
-              <span className="gold"> AWAITS</span>
+              {t('legacyAwaits')}
+              <span className="gold"> {t('awaits')}</span>
             </h2>
             
             <p className="cta-subtitle">
-              The choice is simple. Remain where you are, or step into greatness. 
-              Champions don't wait for tomorrow. They execute today.
+              {t('ctaSubtitle')}
             </p>
             
             <div className="cta-quote">
               <blockquote>
-                "Every master was once a disaster. Every pro was once an amateur. 
-                Every icon was once an unknown. But they all had one thing in common: 
-                they started."
+                "{t('ctaQuote')}"
               </blockquote>
-              <cite>- Coach Chad</cite>
+              <cite>{t('quoteAuthor')}</cite>
             </div>
           </div>
           
           <div className="cta-actions">
             <div className="action-primary">
               <button className="btn btn-primary cta-btn-primary">
-                EXECUTE NOW
+                {t('executeNow')}
               </button>
-              <p className="action-note">Start your transformation today</p>
+              <p className="action-note">{t('startToday')}</p>
             </div>
             
             <div className="action-secondary">
               <button className="btn cta-btn-secondary">
-                LEARN THE METHOD
+                {t('learnMethod')}
               </button>
-              <p className="action-note">Discover the Chad philosophy</p>
+              <p className="action-note">{t('discoverPhilosophy')}</p>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@ const CTA = () => {
             <div className="stat-icon">💪</div>
             <div className="stat-info">
               <span className="stat-number">24/7</span>
-              <span className="stat-label">AI GUIDANCE</span>
+              <span className="stat-label">{t('aiGuidance')}</span>
             </div>
           </div>
           
@@ -57,7 +57,7 @@ const CTA = () => {
             <div className="stat-icon">🔥</div>
             <div className="stat-info">
               <span className="stat-number">∞</span>
-              <span className="stat-label">POTENTIAL</span>
+              <span className="stat-label">{t('potential')}</span>
             </div>
           </div>
           
@@ -65,17 +65,17 @@ const CTA = () => {
             <div className="stat-icon">👑</div>
             <div className="stat-info">
               <span className="stat-number">1</span>
-              <span className="stat-label">LIFETIME</span>
+              <span className="stat-label">{t('lifetime')}</span>
             </div>
           </div>
         </div>
         
         <div className="final-message">
           <p className="message-text">
-            The time for excuses is over. The time for action is now.
+            {t('finalMessage')}
           </p>
           <div className="message-signature">
-            - Coach Chad
+            {t('quoteAuthor')}
           </div>
         </div>
       </div>

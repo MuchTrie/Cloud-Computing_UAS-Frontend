@@ -1,30 +1,33 @@
 import React from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Features.css';
 
 const Features = () => {
+  const { t } = useLanguage();
+  
   const features = [
     {
       icon: '⚡',
-      title: 'INSTANT PRECISION',
-      description: 'No wasted time. No unnecessary words. Every instruction is calculated for maximum impact.',
+      title: t('instantPrecision'),
+      description: t('instantDesc'),
       details: ['AI-powered workout optimization', 'Real-time form corrections', 'Adaptive intensity scaling']
     },
     {
       icon: '🎯',
-      title: 'LASER FOCUS',
-      description: 'Cut through the noise. Focus on what matters. Build habits that build legends.',
+      title: t('laserFocus'),
+      description: t('focusDesc'),
       details: ['Goal-oriented programming', 'Distraction elimination protocols', 'Mental discipline training']
     },
     {
       icon: '💀',
-      title: 'ZERO COMPROMISE',
-      description: 'No excuses. No shortcuts. Only the path to greatness. Accept nothing less than excellence.',
+      title: t('zeroCompromise'),
+      description: t('compromiseDesc'),
       details: ['Progressive overload systems', 'Accountability frameworks', 'Performance tracking']
     },
     {
       icon: '👑',
-      title: 'LEGACY BUILDING',
-      description: 'Every rep builds your empire. Every session writes your story. Become the legend you were meant to be.',
+      title: t('legacyBuilding'),
+      description: t('buildingDesc'),
       details: ['Long-term transformation', 'Character development', 'Sustainable excellence']
     }
   ];
@@ -34,11 +37,11 @@ const Features = () => {
       <div className="container">
         <div className="section-header">
           <h2 className="section-title text-center">
-            THE CHAD
-            <span className="gold"> METHOD</span>
+            {t('chadMethod')}
+            <span className="gold"> {t('method')}</span>
           </h2>
           <p className="section-subtitle text-center">
-            Four pillars of transformation. No compromise. No excuses.
+            {t('featuresSubtitle')}
           </p>
         </div>
         
@@ -69,9 +72,9 @@ const Features = () => {
         
         <div className="features-cta">
           <div className="cta-content">
-            <h3>READY TO BEGIN?</h3>
-            <p>The path to greatness starts with a single step. Take it now.</p>
-            <button className="btn btn-primary">START YOUR TRANSFORMATION</button>
+            <h3>{t('readyBegin')}</h3>
+            <p>{t('pathGreatness')}</p>
+            <button className="btn btn-primary">{t('startTransformation')}</button>
           </div>
         </div>
       </div>

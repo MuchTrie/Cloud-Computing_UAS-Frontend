@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Hero.css';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     setIsVisible(true);
@@ -23,27 +25,27 @@ const Hero = () => {
         <div className="hero-content">
           <div className={`hero-text ${isVisible ? 'fade-in-up' : ''}`}>
             <h1 className="hero-title">
-              BUILD YOUR
-              <span className="gold"> LEGACY</span>
+              {t('buildLegacy')}
+              <span className="gold"> {t('legacy')}</span>
             </h1>
             
             <p className="hero-subtitle">
-              Your personal AI mentor for peak physical and mental discipline.
+              {t('heroSubtitle')}
             </p>
             
             <div className="hero-quote">
               <blockquote>
-                "Work hard in silence. Let success be your noise."
+                "{t('heroQuote')}"
               </blockquote>
-              <cite>- Coach Chad</cite>
+              <cite>{t('quoteAuthor')}</cite>
             </div>
             
             <div className="hero-actions">
               <button className="btn btn-primary hero-btn">
-                EXECUTE
+                {t('execute')}
               </button>
               <button className="btn hero-btn-secondary">
-                LEARN MORE
+                {t('learnMore')}
               </button>
             </div>
           </div>
@@ -52,7 +54,7 @@ const Hero = () => {
       
       <div className="hero-scroll">
         <div className="scroll-indicator">
-          <span>SCROLL TO DISCOVER</span>
+          <span>{t('scrollDiscover')}</span>
           <div className="scroll-arrow"></div>
         </div>
       </div>

@@ -1,7 +1,10 @@
 import React from 'react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Footer.css';
 
 const Footer = () => {
+  const { t } = useLanguage();
+  
   return (
     <footer id="contact" className="footer">
       <div className="container">
@@ -9,42 +12,42 @@ const Footer = () => {
           <div className="footer-brand">
             <h3 className="footer-logo">COACH CHAD</h3>
             <p className="footer-tagline">
-              Build Your Legacy. Execute Excellence. Embrace Greatness.
+              {t('buildLegacyTagline')}
             </p>
             
             <div className="footer-quote">
-              <p>"Champions are made in silence. Legends speak through results."</p>
+              <p>"{t('championsQuote')}"</p>
             </div>
           </div>
           
           <div className="footer-links">
             <div className="link-column">
-              <h4>TRAINING</h4>
+              <h4>{t('training')}</h4>
               <ul>
-                <li><a href="#strength">Strength Building</a></li>
-                <li><a href="#discipline">Mental Discipline</a></li>
-                <li><a href="#habits">Habit Formation</a></li>
-                <li><a href="#nutrition">Nutrition Guidance</a></li>
+                <li><a href="#strength">{t('strengthBuilding')}</a></li>
+                <li><a href="#discipline">{t('mentalDiscipline')}</a></li>
+                <li><a href="#habits">{t('habitFormation')}</a></li>
+                <li><a href="#nutrition">{t('nutritionGuidance')}</a></li>
               </ul>
             </div>
             
             <div className="link-column">
               <h4>PHILOSOPHY</h4>
               <ul>
-                <li><a href="#mindset">Alpha Mindset</a></li>
-                <li><a href="#discipline">Discipline Over Motivation</a></li>
-                <li><a href="#legacy">Legacy Building</a></li>
-                <li><a href="#excellence">Excellence Standards</a></li>
+                <li><a href="#mindset">{t('alphaMindset')}</a></li>
+                <li><a href="#discipline">{t('disciplineMotivation')}</a></li>
+                <li><a href="#legacy">{t('legacyBuildingNav')}</a></li>
+                <li><a href="#excellence">{t('excellenceStandards')}</a></li>
               </ul>
             </div>
             
             <div className="link-column">
-              <h4>CONTACT</h4>
+              <h4>{t('contact')}</h4>
               <ul>
-                <li><a href="#start">Start Training</a></li>
-                <li><a href="#support">Support</a></li>
-                <li><a href="#community">Join Community</a></li>
-                <li><a href="#feedback">Feedback</a></li>
+                <li><a href="#start">{t('startTraining')}</a></li>
+                <li><a href="#support">{t('support')}</a></li>
+                <li><a href="#community">{t('joinCommunity')}</a></li>
+                <li><a href="#feedback">{t('feedback')}</a></li>
               </ul>
             </div>
           </div>
@@ -54,15 +57,15 @@ const Footer = () => {
           <div className="footer-principles">
             <div className="principle-item">
               <span className="principle-icon">💪</span>
-              <span className="principle-text">STRENGTH</span>
+              <span className="principle-text">{t('strength')}</span>
             </div>
             <div className="principle-item">
               <span className="principle-icon">🎯</span>
-              <span className="principle-text">FOCUS</span>
+              <span className="principle-text">{t('focus')}</span>
             </div>
             <div className="principle-item">
               <span className="principle-icon">👑</span>
-              <span className="principle-text">LEGACY</span>
+              <span className="principle-text">{t('legacyFooter')}</span>
             </div>
           </div>
           
@@ -70,11 +73,11 @@ const Footer = () => {
           
           <div className="footer-final">
             <p className="copyright">
-              © 2025 Coach Chad. Built for Champions. Designed for Legends.
+              {t('copyright')}
             </p>
             
             <div className="footer-motto">
-              <p>EXECUTE. EXCEL. ELEVATE.</p>
+              <p>{t('motto')}</p>
             </div>
           </div>
         </div>

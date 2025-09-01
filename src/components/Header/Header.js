@@ -18,7 +18,7 @@ const Header = () => {
       <div className="container">
         <nav className="nav">
           <div className="logo">
-            <span className="logo-text">COACH CHAD</span>
+            <span className="logo-text">Fit-Chad AI</span>
           </div>
           
           <ul className="nav-links">

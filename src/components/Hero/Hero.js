@@ -12,7 +12,11 @@ const Hero = () => {
     <section id="home" className="hero">
       <div className="hero-background">
         <div className="hero-overlay"></div>
-        <div className="hero-geometric"></div>
+        <img 
+          src="/assets/img/hero.jpg" 
+          alt="Athletic Chad silhouette" 
+          className="hero-image"
+        />
       </div>
       
       <div className="container">

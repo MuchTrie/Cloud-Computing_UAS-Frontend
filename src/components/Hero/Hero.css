@@ -230,3 +230,82 @@
     font-size: 14px;
   }
 }
+
+/* 3D Effects */
+.tilt-3d {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.title-3d-wrapper {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateZ(20px);
+}
+
+.quote-3d-wrapper {
+  padding: 10px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+  transform: translateZ(20px);
+}
+
+/* Gold shimmer effect for 3D elements */
+@keyframes goldShimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.hero-title.tilt-3d::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+  background-size: 200% 100%;
+  z-index: -1;
+  animation: goldShimmer 3s linear infinite;
+  pointer-events: none;
+  border-radius: 5px;
+}
+
+.hero-btn.tilt-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
+  transform: perspective(1000px) translateZ(0);
+}
+
+.btn.btn-primary.hero-btn.tilt-3d:hover {
+  transform: translateZ(10px);
+  box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+}
+
+.btn.hero-btn-secondary.tilt-3d:hover {
+  transform: translateZ(10px);
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Disable 3D effects on mobile */
+@media (max-width: 768px) {
+  .tilt-3d {
+    transform: none !important;
+  }
+  
+  .title-3d-wrapper,
+  .quote-3d-wrapper {
+    transform: none;
+  }
+}

@@ -266,3 +266,84 @@
     font-size: 3rem;
   }
 }
+
+/* 3D Effects */
+.tilt-3d {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.principle.tilt-3d {
+  cursor: pointer;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.principle-3d-content {
+  position: relative;
+  transform: translateZ(20px);
+  padding: 20px;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  transition: transform 0.3s ease;
+}
+
+.principle:hover .principle-3d-content {
+  transform: translateZ(30px);
+}
+
+.principle:hover .principle-number {
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.philosophy.tilt-3d {
+  margin-bottom: 40px;
+}
+
+.philosophy-3d-content {
+  padding: 20px;
+  transform: translateZ(20px);
+  background: rgba(15, 15, 15, 0.3);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.philosophy-3d-content::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+  transform: rotate(45deg);
+  pointer-events: none;
+  z-index: -1;
+  animation: rotateGradient 8s linear infinite;
+}
+
+@keyframes rotateGradient {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Disable 3D effects on mobile */
+@media (max-width: 768px) {
+  .tilt-3d {
+    transform: none !important;
+  }
+  
+  .principle-3d-content,
+  .philosophy-3d-content {
+    transform: none !important;
+  }
+}

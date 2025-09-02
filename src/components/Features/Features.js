@@ -1,9 +1,60 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import VanillaTilt from 'vanilla-tilt';
 import './Features.css';
 
 const Features = () => {
   const { t } = useLanguage();
+  const [scrollY, setScrollY] = useState(0);
+  const featureCards = useRef([]);
+  
+  // Initialize featureCards array
+  useEffect(() => {
+    // Reset the array when features change
+    featureCards.current = [];
+  }, []);
+
+  // Handle parallax effect on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  // Initialize 3D tilt effect on feature cards
+  useEffect(() => {
+    // Only apply tilt if cards exist and the featureCards.current is an array
+    if (featureCards.current && Array.isArray(featureCards.current)) {
+      // Filter out any null or undefined values
+      const validCards = featureCards.current.filter(card => card);
+      
+      validCards.forEach(card => {
+        VanillaTilt.init(card, {
+          max: 15,
+          speed: 400,
+          glare: true,
+          "max-glare": 0.3,
+          scale: 1.05,
+          perspective: 1000
+        });
+      });
+      
+      // Cleanup function
+      return () => {
+        validCards.forEach(card => {
+          if (card && card.vanillaTilt) {
+            card.vanillaTilt.destroy();
+          }
+        });
+      };
+    }
+    
+    // Return empty cleanup if no valid cards
+    return () => {};
+  }, []);
   
   const features = [
     {
@@ -45,9 +96,19 @@ const Features = () => {
           </p>
         </div>
         
-        <div className="features-grid">
+        <div className="features-grid parallax-container">
           {features.map((feature, index) => (
-            <div key={index} className="feature-card" data-aos="fade-up" data-aos-delay={index * 100}>
+            <div 
+              key={index} 
+              className="feature-card tilt-3d" 
+              ref={el => {
+                if (el) {
+                  featureCards.current[index] = el;
+                }
+              }}
+              style={{
+                transform: `translateY(${(scrollY * 0.05 * (index % 2 === 0 ? 1 : -1))}px)`
+              }}>
               <div className="feature-icon">
                 {feature.icon}
               </div>

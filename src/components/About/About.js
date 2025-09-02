@@ -1,9 +1,52 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import VanillaTilt from 'vanilla-tilt';
 import './About.css';
 
 const About = () => {
   const { t } = useLanguage();
+  const principle1Ref = useRef(null);
+  const principle2Ref = useRef(null);
+  const principle3Ref = useRef(null);
+  const philosophyRef = useRef(null);
+  
+  useEffect(() => {
+    // Apply 3D effect to principles
+    const principles = [principle1Ref, principle2Ref, principle3Ref];
+    principles.forEach(ref => {
+      if (ref.current) {
+        VanillaTilt.init(ref.current, {
+          max: 15,
+          speed: 400,
+          glare: true,
+          "max-glare": 0.2,
+          scale: 1.05,
+          perspective: 1000
+        });
+      }
+    });
+    
+    // Apply 3D effect to philosophy quote
+    if (philosophyRef.current) {
+      VanillaTilt.init(philosophyRef.current, {
+        max: 10,
+        speed: 400,
+        scale: 1.05
+      });
+    }
+    
+    // Cleanup
+    return () => {
+      principles.forEach(ref => {
+        if (ref.current && ref.current.vanillaTilt) {
+          ref.current.vanillaTilt.destroy();
+        }
+      });
+      if (philosophyRef.current && philosophyRef.current.vanillaTilt) {
+        philosophyRef.current.vanillaTilt.destroy();
+      }
+    };
+  }, []);
   
   return (
     <section id="about" className="about section">
@@ -20,35 +63,43 @@ const About = () => {
                 {t('aboutDescription')}
               </p>
               
-              <div className="philosophy">
-                <h3>{t('thePhilosophy')}</h3>
-                <blockquote>
-                  "{t('philosophyQuote')}"
-                </blockquote>
+              <div className="philosophy tilt-3d" ref={philosophyRef}>
+                <div className="philosophy-3d-content">
+                  <h3>{t('thePhilosophy')}</h3>
+                  <blockquote>
+                    "{t('philosophyQuote')}"
+                  </blockquote>
+                </div>
               </div>
               
               <div className="principles">
-                <div className="principle">
-                  <div className="principle-number">01</div>
-                  <div className="principle-content">
-                    <h4>{t('disciplineOver')}</h4>
-                    <p>{t('disciplineDesc')}</p>
+                <div className="principle tilt-3d" ref={principle1Ref}>
+                  <div className="principle-3d-content">
+                    <div className="principle-number">01</div>
+                    <div className="principle-content">
+                      <h4>{t('disciplineOver')}</h4>
+                      <p>{t('disciplineDesc')}</p>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="principle">
-                  <div className="principle-number">02</div>
-                  <div className="principle-content">
-                    <h4>{t('silenceOver')}</h4>
-                    <p>{t('silenceDesc')}</p>
+                <div className="principle tilt-3d" ref={principle2Ref}>
+                  <div className="principle-3d-content">
+                    <div className="principle-number">02</div>
+                    <div className="principle-content">
+                      <h4>{t('silenceOver')}</h4>
+                      <p>{t('silenceDesc')}</p>
+                    </div>
                   </div>
                 </div>
                 
-                <div className="principle">
-                  <div className="principle-number">03</div>
-                  <div className="principle-content">
-                    <h4>{t('legacyOver')}</h4>
-                    <p>{t('legacyDesc')}</p>
+                <div className="principle tilt-3d" ref={principle3Ref}>
+                  <div className="principle-3d-content">
+                    <div className="principle-number">03</div>
+                    <div className="principle-content">
+                      <h4>{t('legacyOver')}</h4>
+                      <p>{t('legacyDesc')}</p>
+                    </div>
                   </div>
                 </div>
               </div>

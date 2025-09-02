@@ -1,6 +1,7 @@
 .hero {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 120px 20px 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,20 +71,21 @@
 
 .hero-title {
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: 900;
   line-height: 0.9;
-  margin-bottom: 30px;
-  letter-spacing: 4px;
+  margin-bottom: 25px;
+  letter-spacing: 3px;
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8);
   color: #ffffff;
 }
 
 .hero-subtitle {
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   font-weight: 400;
   color: #cccccc;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   letter-spacing: 1px;
   max-width: 600px;
   margin-left: auto;
@@ -92,15 +94,15 @@
 }
 
 .hero-quote {
-  margin: 50px 0;
-  padding: 30px 0;
+  margin: 30px 0;
+  padding: 20px 0;
   border-top: 1px solid rgba(255, 215, 0, 0.3);
   border-bottom: 1px solid rgba(255, 215, 0, 0.3);
 }
 
 .hero-quote blockquote {
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
   font-style: italic;
   font-weight: 500;
   color: #FFD700;
@@ -122,29 +124,29 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .hero-btn {
-  padding: 20px 50px;
-  font-size: 18px;
+  padding: 16px 40px;
+  font-size: 16px;
   letter-spacing: 3px;
-  min-width: 180px;
+  min-width: 160px;
 }
 
 .hero-btn-secondary {
   background: transparent;
   border: 2px solid #ffffff;
   color: #ffffff;
-  padding: 18px 40px;
+  padding: 14px 36px;
   font-family: 'Poppins', sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 160px;
+  min-width: 150px;
 }
 
 .hero-btn-secondary:hover {
@@ -154,62 +156,9 @@
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
-.hero-scroll {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  text-align: center;
-}
+ /* Removed scroll to discover indicator as per design update */
 
-.scroll-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  animation: float 3s ease-in-out infinite;
-}
-
-.scroll-indicator span {
-  font-family: 'Poppins', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: #666666;
-  text-transform: uppercase;
-}
-
-.scroll-arrow {
-  width: 2px;
-  height: 30px;
-  background: linear-gradient(to bottom, transparent, #FFD700, transparent);
-  position: relative;
-}
-
-.scroll-arrow::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid #FFD700;
-  border-bottom: 2px solid #FFD700;
-  transform: translateX(-50%) rotate(45deg);
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* Animations */
+ /* Animations */
 .fade-in-up {
   animation: fadeInUp 1.2s ease forwards;
 }
@@ -217,8 +166,8 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .hero {
-    height: 100vh;
-    padding: 80px 0 40px;
+    min-height: auto;
+    padding: 100px 20px 30px;
   }
   
   .hero-content {
@@ -243,15 +192,41 @@
 }
 
 @media (max-width: 480px) {
+  .hero {
+    padding-top: 80px;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+  }
+
   .hero-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero-quote {
+    margin: 20px 0;
+    padding: 15px 0;
+  }
+
+  .hero-quote blockquote {
     font-size: 1rem;
   }
-  
-  .hero-quote blockquote {
-    font-size: 1.1rem;
+
+  .hero-quote cite {
+    font-size: 0.8rem;
   }
   
-  .scroll-indicator span {
-    font-size: 10px;
+  .hero-actions {
+    margin-top: 20px;
+  }
+
+  .hero-btn, 
+  .hero-btn-secondary {
+    padding: 12px 30px;
+    font-size: 14px;
   }
 }

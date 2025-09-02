@@ -52,12 +52,6 @@ const Hero = () => {
         </div>
       </div>
       
-      <div className="hero-scroll">
-        <div className="scroll-indicator">
-          <span>{t('scrollDiscover')}</span>
-          <div className="scroll-arrow"></div>
-        </div>
-      </div>
     </section>
   );
 };

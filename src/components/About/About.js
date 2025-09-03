@@ -13,9 +13,10 @@ const About = () => {
   useEffect(() => {
     // Apply 3D effect to principles
     const principles = [principle1Ref, principle2Ref, principle3Ref];
-    principles.forEach(ref => {
-      if (ref.current) {
-        VanillaTilt.init(ref.current, {
+    const principleNodes = principles.map(ref => ref.current);
+    principleNodes.forEach(node => {
+      if (node) {
+        VanillaTilt.init(node, {
           max: 15,
           speed: 400,
           glare: true,
@@ -25,25 +26,26 @@ const About = () => {
         });
       }
     });
-    
+
     // Apply 3D effect to philosophy quote
-    if (philosophyRef.current) {
-      VanillaTilt.init(philosophyRef.current, {
+    const philosophyNode = philosophyRef.current;
+    if (philosophyNode) {
+      VanillaTilt.init(philosophyNode, {
         max: 10,
         speed: 400,
         scale: 1.05
       });
     }
-    
+
     // Cleanup
     return () => {
-      principles.forEach(ref => {
-        if (ref.current && ref.current.vanillaTilt) {
-          ref.current.vanillaTilt.destroy();
+      principleNodes.forEach(node => {
+        if (node && node.vanillaTilt) {
+          node.vanillaTilt.destroy();
         }
       });
-      if (philosophyRef.current && philosophyRef.current.vanillaTilt) {
-        philosophyRef.current.vanillaTilt.destroy();
+      if (philosophyNode && philosophyNode.vanillaTilt) {
+        philosophyNode.vanillaTilt.destroy();
       }
     };
   }, []);

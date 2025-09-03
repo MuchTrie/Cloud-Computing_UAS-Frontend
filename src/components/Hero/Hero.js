@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import AuthModal from '../Auth/AuthModal';
 import './Hero.css';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { t } = useLanguage();
 
   // Simple fade-in effect
@@ -42,7 +44,10 @@ const Hero = () => {
             </div>
             
             <div className="hero-actions">
-              <button className="btn btn-primary hero-btn">
+              <button 
+                className="btn btn-primary hero-btn"
+                onClick={() => setIsAuthModalOpen(true)}
+              >
                 {t('execute')}
               </button>
               <button className="btn hero-btn-secondary">
@@ -53,6 +58,11 @@ const Hero = () => {
         </div>
       </div>
       
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
     </section>
   );
 };

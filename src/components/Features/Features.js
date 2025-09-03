@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import VanillaTilt from 'vanilla-tilt';
+import AuthModal from '../Auth/AuthModal';
 import './Features.css';
 
 const Features = () => {
   const { t } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const featureCards = useRef([]);
   
   // Initialize featureCards array
@@ -135,10 +137,21 @@ const Features = () => {
           <div className="cta-content">
             <h3>{t('readyBegin')}</h3>
             <p>{t('pathGreatness')}</p>
-            <button className="btn btn-primary">{t('startTransformation')}</button>
+            <button 
+              className="btn btn-primary"
+              onClick={() => setIsAuthModalOpen(true)}
+            >
+              {t('startTransformation')}
+            </button>
           </div>
         </div>
       </div>
+      
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
     </section>
   );
 };

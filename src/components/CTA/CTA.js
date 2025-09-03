@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
+import AuthModal from '../Auth/AuthModal';
 import './CTA.css';
 
 const CTA = () => {
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { t } = useLanguage();
   
   return (
@@ -29,7 +31,10 @@ const CTA = () => {
           
           <div className="cta-actions">
             <div className="action-primary">
-              <button className="btn btn-primary cta-btn-primary">
+              <button 
+                className="btn btn-primary cta-btn-primary"
+                onClick={() => setIsAuthModalOpen(true)}
+              >
                 {t('executeNow')}
               </button>
               <p className="action-note">{t('startToday')}</p>
@@ -79,6 +84,12 @@ const CTA = () => {
           </div>
         </div>
       </div>
+      
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
     </section>
   );
 };

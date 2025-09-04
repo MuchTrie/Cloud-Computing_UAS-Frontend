@@ -42,13 +42,13 @@ export const translations = {
     loginNow: 'Login Now',
     
     // Hero
-    buildLegacy: 'BUILD YOUR',
-    legacy: 'LEGACY',
-    heroSubtitle: 'Your personal AI mentor for peak physical and mental discipline.',
+    buildLegacy: 'BANGUN',
+    legacy: 'LEGASI MU',
+    heroSubtitle: 'Mentor AI pribadi untuk disiplin fisik dan mental yang optimal.',
     heroQuote: 'Work hard in silence. Let success be your noise.',
     quoteAuthor: '- Coach Chad',
-    execute: 'EXECUTE',
-    learnMore: 'LEARN MORE',
+    execute: 'EKSEKUSI',
+    learnMore: 'PELAJARI LEBIH LANJUT',
     scrollDiscover: 'SCROLL TO DISCOVER',
     
     // About

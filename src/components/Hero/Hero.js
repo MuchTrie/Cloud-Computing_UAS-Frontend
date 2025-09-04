@@ -29,19 +29,12 @@ const Hero = () => {
           <div className={`hero-text ${isVisible ? 'fade-in' : ''}`}>
             <h1 className="hero-title">
               {t('buildLegacy')}
-              <span className="gold"> {t('legacy')}</span>
+              <span style={{ color: "#FFD700", textShadow: "0 0 20px rgba(255, 215, 0, 0.5)" }}> {t('legacy')}</span>
             </h1>
             
             <p className="hero-subtitle">
               {t('heroSubtitle')}
             </p>
-            
-            <div className="hero-quote">
-              <blockquote>
-                "{t('heroQuote')}"
-              </blockquote>
-              <cite>{t('quoteAuthor')}</cite>
-            </div>
             
             <div className="hero-actions">
               <button 
@@ -50,7 +43,12 @@ const Hero = () => {
               >
                 {t('execute')}
               </button>
-              <button className="btn hero-btn-secondary">
+              <button 
+                className="btn hero-btn-secondary"
+                onClick={() => {
+                  document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 {t('learnMore')}
               </button>
             </div>

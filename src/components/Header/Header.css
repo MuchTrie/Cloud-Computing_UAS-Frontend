@@ -10,6 +10,23 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.header .container {
+  position: relative; /* Container needs to be positioned for absolute children */
+}
+
+.logo-image {
+  height: 42px;
+  width: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.desktop-logo {
+  display: flex;
+  align-items: center;
+}
+
 .lang-text {
   color: rgba(255, 255, 255, 0.7);
   transition: all 0.3s ease;
@@ -270,6 +287,14 @@
   margin-left: 15px;
 }
 
+/* Position the hamburger menu at the top-right on mobile */
+.hamburger-menu.top-right {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  margin: 0;
+}
+
 .hamburger-menu span {
   display: block;
   width: 100%;
@@ -316,6 +341,12 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     padding: 10px 0;
+    position: relative; /* To position the hamburger menu correctly */
+  }
+  
+  /* Hide desktop logo on mobile */
+  .desktop-logo {
+    display: none;
   }
   
   /* Show hamburger on mobile */
@@ -340,7 +371,11 @@
   
   .hamburger-menu {
     display: flex;
-    order: 3;
+  }
+  
+  /* Remove order property to allow absolute positioning */
+  .hamburger-menu.top-right {
+    order: initial;
   }
   
   .nav-links.desktop {
@@ -358,13 +393,36 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 80px 0 30px;
+    justify-content: flex-start;
+    padding: 30px 0;
     transition: all 0.3s ease;
     z-index: 999;
     box-shadow: -5px 0 20px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
     overscroll-behavior: contain;
+  }
+  
+  /* Mobile Logo Styling */
+  .mobile-logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  
+  .mobile-menu.mobile-active .mobile-logo {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s;
+  }
+  
+  .mobile-logo .logo-image {
+    height: 50px;
+    width: auto;
   }
   
   .mobile-menu.mobile-active {

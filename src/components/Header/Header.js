@@ -70,9 +70,7 @@ const Header = () => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <nav className="nav">
-          <div className="logo">
-            <span className="logo-text">Fit-Chad AI</span>
-          </div>
+          {/* Logo removed from here and moved into mobile menu */}
           
           {/* Hamburger Menu Button */}
           <button 
@@ -128,6 +126,10 @@ const Header = () => {
           
           {/* Mobile Navigation Menu */}
           <div className={`mobile-menu ${isMobileMenuOpen ? 'mobile-active' : ''}`}>
+            {/* Logo added here inside the mobile menu */}
+            <div className="mobile-logo">
+              <img src="/assets/img/logo2.png" alt="Chad.AI Logo" className="logo-image" />
+            </div>
             <ul className="menu-items">
               <li>
                 <a 

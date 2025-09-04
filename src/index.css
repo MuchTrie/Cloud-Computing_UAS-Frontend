@@ -8,6 +8,7 @@
 html, body {
   height: 100%;
   overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -17,6 +18,9 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  margin: 0;
+  padding: 0;
 }
 
 /* Typography */
@@ -49,4 +53,23 @@ h1, h2, h3, h4, h5, h6 {
 ::selection {
   background: #FFD700;
   color: #000000;
+}
+
+/* Mobile Responsive Fix */
+@media (max-width: 480px) {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    width: 100% !important;
+  }
+
+  /* Fix untuk iOS Safari yang kadang mengalami masalah dengan height: 100vh */
+  .hero {
+    height: -webkit-fill-available;
+  }
 }

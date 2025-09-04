@@ -42,13 +42,13 @@ export const translations = {
     loginNow: 'Login Now',
     
     // Hero
-    buildLegacy: 'BANGUN',
-    legacy: 'LEGASI MU',
-    heroSubtitle: 'Mentor AI pribadi untuk disiplin fisik dan mental yang optimal.',
-    heroQuote: 'Work hard in silence. Let success be your noise.',
-    quoteAuthor: '- Coach Chad',
-    execute: 'EKSEKUSI',
-    learnMore: 'PELAJARI LEBIH LANJUT',
+  buildLegacy: 'BUILD',
+  legacy: 'YOUR LEGACY',
+  heroSubtitle: 'Your personal AI mentor for optimal physical and mental discipline.',
+  heroQuote: 'Work hard in silence. Let success be your noise.',
+  quoteAuthor: '- Coach Chad',
+  execute: 'EXECUTE',
+  learnMore: 'LEARN MORE',
     scrollDiscover: 'SCROLL TO DISCOVER',
     
     // About
@@ -120,6 +120,18 @@ export const translations = {
   },
   id: {
     // Header
+    home: 'BERANDA',
+    about: 'TENTANG',
+    training: 'LATIHAN',
+    contact: 'KONTAK',
+    startNow: 'MULAI SEKARANG',
+    
+    // Hero
+    buildLegacy: 'BANGUN',
+    legacy: 'LEGASI MU',
+    heroSubtitle: 'Mentor AI pribadi untuk disiplin fisik dan mental yang optimal.',
+    execute: 'EKSEKUSI',
+    learnMore: 'PELAJARI LEBIH LANJUT',
     
     // Auth Modal
     login: 'MASUK',
@@ -142,11 +154,6 @@ export const translations = {
     alreadyHaveAccount: 'Sudah memiliki akun? ',
     registerNow: 'Daftar Sekarang',
     loginNow: 'Masuk Sekarang',
-    home: 'BERANDA',
-    about: 'TENTANG',
-    training: 'LATIHAN',
-    contact: 'KONTAK',
-    startNow: 'MULAI SEKARANG',
     
     // Hero
     buildLegacy: 'BANGUN',
@@ -228,10 +235,15 @@ export const translations = {
 };
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('en');
+  const initial = typeof window !== 'undefined' && localStorage.getItem('lang') ? localStorage.getItem('lang') : 'en';
+  const [language, setLanguage] = useState(initial);
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === 'en' ? 'id' : 'en');
+    setLanguage(prev => {
+      const next = prev === 'en' ? 'id' : 'en';
+      try { localStorage.setItem('lang', next); } catch(e) {}
+      return next;
+    });
   };
 
   const t = (key) => {

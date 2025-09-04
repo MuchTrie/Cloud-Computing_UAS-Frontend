@@ -70,19 +70,10 @@ const Header = () => {
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <nav className="nav">
-          {/* Logo removed from here and moved into mobile menu */}
-          
-          {/* Hamburger Menu Button */}
-          <button 
-            className={`hamburger-menu ${isMobileMenuOpen ? 'open' : ''}`}
-            onClick={toggleMobileMenu}
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isMobileMenuOpen}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+          {/* Desktop Logo */}
+          <div className="desktop-logo">
+            <img src="/assets/img/logo2.png" alt="Chad.AI Logo" className="logo-image" />
+          </div>
           
           {/* Desktop Navigation Links */}
           <ul className="nav-links desktop">
@@ -213,6 +204,18 @@ const Header = () => {
               {t('startNow')}
             </button>
           </div>
+          {/* Hamburger placed outside so it's still visible when nav-actions buttons hidden on very small screens */}
+          <button 
+            className={`hamburger-menu ${isMobileMenuOpen ? 'open' : ''}`}
+            onClick={toggleMobileMenu}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </nav>
       </div>
       

@@ -6,12 +6,14 @@ import './Hero.css';
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage(); // language ensures component re-renders on toggle
 
   // Simple fade-in effect
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  // No extra effect needed; using language inside render is enough for re-render
 
   return (
     <section id="home" className="hero">

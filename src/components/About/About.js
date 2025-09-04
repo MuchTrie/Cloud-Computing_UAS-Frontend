@@ -33,7 +33,7 @@ const About = () => {
       VanillaTilt.init(philosophyNode, {
         max: 10,
         speed: 400,
-        scale: 1.03
+        scale: 1.05
       });
     }
 

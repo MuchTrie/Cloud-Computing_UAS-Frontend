@@ -10,6 +10,16 @@ const initialExercises = [
 const WorkoutPage = () => {
   const [exercises, setExercises] = useState(initialExercises);
   const [started, setStarted] = useState(false);
+  const [openVideo, setOpenVideo] = useState(null);
+
+  const videos = [
+    { file: 'Clean_Rows.mp4', title: 'Teknik Clean Rows', thumb: 'Clean_Rows.jpg', desc: 'Demonstrasi teknik clean rows yang benar—fokus pada punggung netral, tarik siku ke belakang, dan stabilitas inti.' },
+    { file: 'Common_Shoulder_Mistakes_Explained.mp4', title: 'Kesalahan Umum Bahu', thumb: 'Common_Shoulder_Mistakes_Explained.jpg', desc: 'Ulasan kesalahan umum saat melatih bahu dan koreksi posisi untuk mengurangi risiko cedera.' },
+    { file: 'Curl_Mistakes.mp4', title: 'Kesalahan Saat Curl', thumb: 'Curl_Mistakes.jpg', desc: 'Contoh kesalahan saat melakukan curl dan tips memperbaiki teknik agar otot target bekerja efektif.' },
+    { file: 'Dumbbell_Lunge_Mistakes_Before_Leg_Day.mp4', title: 'Tips Lunge Dumbbell', thumb: 'Dumbbell_Lunge_Mistakes_Before_Leg_Day.jpg', desc: 'Tips lunge dengan dumbbell untuk menjaga keseimbangan, depth yang tepat, dan aktivasi otot paha.' }
+  ,{ file: 'Abs_Workout_You_Can_Do_Anywhere_With_Just_Bodyweight_&_Dumbbells.mp4', title: 'Latihan Abs (Bodyweight & Dumbbells)', thumb: 'Abs_Workout_You_Can_Do_Anywhere_With_Just_Bodyweight_&_Dumbbells.jpg', desc: 'Rangkaian latihan perut yang bisa dilakukan di rumah, dengan opsi bodyweight atau tambahan dumbbell untuk progresi.' }
+  ,{ file: 'SingleArm_Dumbbell_Row_Mistakes_You_Should_Avoid.mp4', title: 'Kesalahan Single-Arm Dumbbell Row', thumb: 'SingleArm_Dumbbell_Row_Mistakes_You_Should_Avoid.jpg', desc: 'Identifikasi kesalahan umum pada single-arm row dan langkah korektif untuk memastikan aktivasi punggung yang tepat.' }
+  ];
 
   const toggleDone = (index) => {
     setExercises(prev => prev.map((ex,i) => i===index ? { ...ex, done: !ex.done } : ex));
@@ -50,6 +60,30 @@ const WorkoutPage = () => {
             ))}
           </tbody>
         </table>
+        {/* Video Section */}
+        <section className="video-section" aria-label="Video Edukasi Latihan">
+          <div className="video-header">
+            <h2>Video Edukasi</h2>
+            <p>Teknik & koreksi umum untuk meningkatkan performa.</p>
+          </div>
+          <div className="video-grid">
+            {videos.map(v => {
+              const thumbPath = `/assets/vid/${v.thumb}`; // siapkan file gambar dengan nama sama .jpg di folder vid
+              return (
+                <button key={v.file} className="video-card" onClick={() => setOpenVideo(v)} aria-label={`Putar video ${v.title}`}>
+                  <div className="thumb-overlay has-thumb">
+                    <img src={thumbPath} alt={v.title} loading="lazy" onError={(e)=>{e.currentTarget.style.display='none';}} />
+                    <span className="play-icon">▶</span>
+                  </div>
+                  <div className="video-meta">
+                    <strong>{v.title}</strong>
+                    <p className="desc">{v.desc}</p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </section>
       </div>
       <aside className="workout-side" aria-label="Kalender dan rekor pribadi">
         <div className="week-calendar">
@@ -63,12 +97,23 @@ const WorkoutPage = () => {
         <div className="pr-card">
           <h2>Rekor Pribadi</h2>
           <ul>
-            <li><span>Squat</span><strong>150 kg</strong></li>
-            <li><span>Deadlift</span><strong>200 kg</strong></li>
-            <li><span>Bench Press</span><strong>110 kg</strong></li>
+            <li><span>-</span><strong>-</strong></li>
+            <li><span>-</span><strong>-</strong></li>
+            <li><span>-</span><strong>-</strong></li>
           </ul>
         </div>
       </aside>
+      {openVideo && (
+        <div className="video-modal" role="dialog" aria-modal="true" aria-label={openVideo.title} onClick={() => setOpenVideo(null)}>
+          <div className="video-dialog" onClick={e => e.stopPropagation()}>
+            <div className="video-dialog-header">
+              <h3>{openVideo.title}</h3>
+              <button className="close-btn" onClick={() => setOpenVideo(null)} aria-label="Tutup">✕</button>
+            </div>
+            <video src={`/assets/vid/${openVideo.file}`} controls autoPlay playsInline />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

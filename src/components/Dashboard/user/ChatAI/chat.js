@@ -28,12 +28,18 @@ const ChatAI = () => {
     }
   }, [messages]);
 
+  const conversationIdRef = useRef(null);
+  if (!conversationIdRef.current) {
+    conversationIdRef.current = Math.random().toString(36).slice(2);
+  }
+
   const askBackend = async (userText) => {
     const url = API_BASE ? `${API_BASE}/chat` : '/chat';
+    const payload = { conversationId: conversationIdRef.current, message: userText };
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: userText })
+      body: JSON.stringify(payload)
     });
     let data;
     try { data = await res.json(); } catch { data = {}; }
@@ -41,7 +47,11 @@ const ChatAI = () => {
       const msg = data?.error || `HTTP ${res.status}`;
       throw new Error(msg);
     }
-    return data.reply || data.output || data.text || '(tanpa balasan)';
+    const reply = data.reply || data.output || data.text || data.rawReply;
+    if (!reply || !reply.trim()) {
+      return 'Belum ada jawaban dari model, coba ulangi atau jelaskan lebih spesifik.';
+    }
+    return reply;
   };
 
   // Typewriter effect: progressively reveals text in-place

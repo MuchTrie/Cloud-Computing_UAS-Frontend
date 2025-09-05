@@ -13,12 +13,15 @@ const WorkoutPage = () => {
   const [openVideo, setOpenVideo] = useState(null);
 
   const videos = [
-    { file: 'Clean_Rows.mp4', title: 'Teknik Clean Rows', thumb: 'Clean_Rows.jpg', desc: 'Demonstrasi teknik clean rows yang benar—fokus pada punggung netral, tarik siku ke belakang, dan stabilitas inti.' },
-    { file: 'Common_Shoulder_Mistakes_Explained.mp4', title: 'Kesalahan Umum Bahu', thumb: 'Common_Shoulder_Mistakes_Explained.jpg', desc: 'Ulasan kesalahan umum saat melatih bahu dan koreksi posisi untuk mengurangi risiko cedera.' },
-    { file: 'Curl_Mistakes.mp4', title: 'Kesalahan Saat Curl', thumb: 'Curl_Mistakes.jpg', desc: 'Contoh kesalahan saat melakukan curl dan tips memperbaiki teknik agar otot target bekerja efektif.' },
-    { file: 'Dumbbell_Lunge_Mistakes_Before_Leg_Day.mp4', title: 'Tips Lunge Dumbbell', thumb: 'Dumbbell_Lunge_Mistakes_Before_Leg_Day.jpg', desc: 'Tips lunge dengan dumbbell untuk menjaga keseimbangan, depth yang tepat, dan aktivasi otot paha.' }
-  ,{ file: 'Abs_Workout_You_Can_Do_Anywhere_With_Just_Bodyweight_&_Dumbbells.mp4', title: 'Latihan Abs (Bodyweight & Dumbbells)', thumb: 'Abs_Workout_You_Can_Do_Anywhere_With_Just_Bodyweight_&_Dumbbells.jpg', desc: 'Rangkaian latihan perut yang bisa dilakukan di rumah, dengan opsi bodyweight atau tambahan dumbbell untuk progresi.' }
-  ,{ file: 'SingleArm_Dumbbell_Row_Mistakes_You_Should_Avoid.mp4', title: 'Kesalahan Single-Arm Dumbbell Row', thumb: 'SingleArm_Dumbbell_Row_Mistakes_You_Should_Avoid.jpg', desc: 'Identifikasi kesalahan umum pada single-arm row dan langkah korektif untuk memastikan aktivasi punggung yang tepat.' }
+  { file: 'Clean_Rows.mp4', title: 'Teknik Clean Rows', thumb: '/assets/img/thumbnail/Clean_Rows.png', desc: 'Demonstrasi teknik clean rows yang benar—fokus pada punggung netral, tarik siku ke belakang, dan stabilitas inti.' },
+  { file: 'Common_Shoulder_Mistakes_Explained.mp4', title: 'Kesalahan Umum Bahu', thumb: '/assets/img/thumbnail/Common_Shoulder_Mistakes_Explained.png', desc: 'Ulasan kesalahan umum saat melatih bahu dan koreksi posisi untuk mengurangi risiko cedera.' },
+  { file: 'Curl_Mistakes.mp4', title: 'Kesalahan Saat Curl', thumb: '/assets/img/thumbnail/Curl_Mistakes.png', desc: 'Contoh kesalahan saat melakukan curl dan tips memperbaiki teknik agar otot target bekerja efektif.' },
+  { file: 'Dumbbell_Lunge_Mistakes_Before_Leg_Day.mp4', title: 'Tips Lunge Dumbbell', thumb: '/assets/img/thumbnail/Dumbbell_Lunge_Mistakes_Before_Leg_Day.png', desc: 'Tips lunge dengan dumbbell untuk menjaga keseimbangan, depth yang tepat, dan aktivasi otot paha.' }
+  ,{ file: 'Abs_Workout_You_Can_Do_Anywhere_With_Just_Bodyweight_&_Dumbbells.mp4', title: 'Latihan Abs (Bodyweight & Dumbbells)', thumb: '/assets/img/thumbnail/Abs_Workout_You_Can_Do_Anywhere_With_Just_Bodyweight_&_Dumbbells.png', desc: 'Rangkaian latihan perut yang bisa dilakukan di rumah, dengan opsi bodyweight atau tambahan dumbbell untuk progresi.' }
+  ,{ file: 'SingleArm_Dumbbell_Row_Mistakes_You_Should_Avoid.mp4', title: 'Kesalahan Single-Arm Dumbbell Row', thumb: '/assets/img/thumbnail/SingleArm_Dumbbell_Row_Mistakes_You_Should_Avoid.png', desc: 'Identifikasi kesalahan umum pada single-arm row dan langkah korektif untuk memastikan aktivasi punggung yang tepat.' }
+  ,{ file: 'Biceps_Training.mp4', title: 'Latihan Biceps', thumb: '/assets/img/thumbnail/Biceps_Training.png', desc: 'Latihan biceps dengan variasi beban dan teknik untuk meningkatkan kekuatan dan ukuran otot.' }
+  ,{ file: 'Fix_These_Dumbbell_Lunge_Mistakes_Before_Leg_Day.mp4', title: 'Perbaiki Kesalahan Lunge (Dumbbell)', thumb: '/assets/img/thumbnail/Fix_These_Dumbbell_Lunge_Mistakes_Before_Leg_Day.png', desc: 'Perbaikan kesalahan umum pada lunge dengan dumbbell agar aman dan efektif sebelum hari latihan kaki.' }
+  ,{ file: 'How_to_Train_Your_Back_the_Right_Way.mp4', title: 'Cara Latih Punggung yang Benar', thumb: '/assets/img/thumbnail/How_to_Train_Your_Back_the_Right_Way.png', desc: 'Panduan teknik dan variasi latihan punggung untuk membangun otot punggung secara aman dan terkontrol.' }
   ];
 
   const toggleDone = (index) => {
@@ -68,7 +71,8 @@ const WorkoutPage = () => {
           </div>
           <div className="video-grid">
             {videos.map(v => {
-              const thumbPath = `/assets/vid/${v.thumb}`; // siapkan file gambar dengan nama sama .jpg di folder vid
+              // Support either a full path (starts with '/') or a filename stored in /assets/vid
+              const thumbPath = v.thumb ? (v.thumb.startsWith('/') ? v.thumb : `/assets/vid/${v.thumb}`) : null; // siapkan file gambar
               return (
                 <button key={v.file} className="video-card" onClick={() => setOpenVideo(v)} aria-label={`Putar video ${v.title}`}>
                   <div className="thumb-overlay has-thumb">

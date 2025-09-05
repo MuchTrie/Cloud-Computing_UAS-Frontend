@@ -1,14 +1,19 @@
 import React from 'react';
-
-import './Dashboard.css';
+import './theme.css';
+import Sidebar from './Sidebar/Sidebar';
+import MissionToday from './MissionToday/MissionToday';
+import StatsGrid from './StatsGrid/StatsGrid';
+import FloatingChatButton from './FloatingChatButton/FloatingChatButton';
 
 const UserDashboard = () => {
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-content">
-        <h1>Selamat datang, User!</h1>
-        <p>Anda sedang berada di dashboard pengguna.</p>
-      </div>
+    <div className="cd-layout">
+      <Sidebar />
+      <main className="cd-main" aria-label="User dashboard main content">
+        <MissionToday />
+        <StatsGrid />
+      </main>
+      <FloatingChatButton />
     </div>
   );
 };

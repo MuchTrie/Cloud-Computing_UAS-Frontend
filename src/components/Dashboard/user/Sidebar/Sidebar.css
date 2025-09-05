@@ -12,6 +12,8 @@
 .cd-nav-item:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px;background:linear-gradient(var(--cd-yellow),var(--cd-yellow-glow));opacity:0;transition:opacity .3s;}
 .cd-nav-item:hover,.cd-nav-item:focus-visible{background:var(--cd-bg-alt2);border-color:#2d3539;transform:translateX(3px);} 
 .cd-nav-item:hover:before,.cd-nav-item:focus-visible:before{opacity:1;}
+.cd-nav-item.active{background:var(--cd-bg-alt2);border-color:#3a4449;transform:translateX(3px);} 
+.cd-nav-item.active:before{opacity:1;}
 .cd-nav-item:active{transform:translateX(1px) scale(.98);}
 .cd-nav-item .cd-text{flex:1;text-align:left;}
 

@@ -40,7 +40,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/user" element={<UserDashboard />} />
+  <Route path="/user/*" element={<UserDashboard />} />
       </Routes>
     </Router>
   );

@@ -12,10 +12,15 @@ const promptSuggestions = [
   'Strategi tingkatkan disiplin?',
 ];
 
+const API_BASE = (process.env.REACT_APP_API_BASE || '').replace(/\/$/, '');
+
 const ChatAI = () => {
   const [messages, setMessages] = useState(initialMessages);
   const [input, setInput] = useState('');
+  const [isSending, setIsSending] = useState(false);
   const containerRef = useRef(null);
+  const typingIdRef = useRef(null);
+  const typeTimerRef = useRef(null);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -23,28 +28,60 @@ const ChatAI = () => {
     }
   }, [messages]);
 
-  const fakeCoachReply = (userText) => {
-    if (/motivasi|quote|kutipan/i.test(userText)) {
-      return 'Ingat: Konsistensi mengalahkan intensitas. Lanjutkan satu langkah lebih jauh dari rasa malas.';
+  const askBackend = async (userText) => {
+    const url = API_BASE ? `${API_BASE}/chat` : '/chat';
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userText })
+    });
+    let data;
+    try { data = await res.json(); } catch { data = {}; }
+    if (!res.ok) {
+      const msg = data?.error || `HTTP ${res.status}`;
+      throw new Error(msg);
     }
-    if (/squat/i.test(userText)) {
-      return 'Pastikan punggung tetap netral, dorong lutut ke luar, dan kunci nafas (bracing) sebelum turun.';
-    }
-    if (/makan|sehat|makanan/i.test(userText)) {
-      return 'Mulai dengan protein tanpa lemak, sayuran hijau, karbo kompleks, dan cukup air. Hindari gula cair.';
-    }
-    return 'Catat. Fokus, eksekusi, evaluasi. Ada hal lain yang ingin kamu tanyakan?';
+    return data.reply || data.output || data.text || '(tanpa balasan)';
   };
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
-    const userMsg = { role: 'user', text: input.trim() };
+  // Typewriter effect: progressively reveals text in-place
+  const typeOut = (fullText, msgId, speedMs = 22, chunk = 2) => new Promise((resolve) => {
+    // initialize empty text for the target message
+    setMessages(prev => prev.map(m => (m.id === msgId ? { ...m, typing: false, text: '' } : m)));
+    let i = 0;
+    clearInterval(typeTimerRef.current);
+    typeTimerRef.current = setInterval(() => {
+      i = Math.min(fullText.length, i + chunk);
+      const slice = fullText.slice(0, i);
+      setMessages(prev => prev.map(m => (m.id === msgId ? { ...m, text: slice } : m)));
+      if (i >= fullText.length) {
+        clearInterval(typeTimerRef.current);
+        resolve();
+      }
+    }, speedMs);
+  });
+
+  const sendMessage = async () => {
+    const text = input.trim();
+    if (!text || isSending) return;
+    const userMsg = { role: 'user', text };
     setMessages(prev => [...prev, userMsg]);
     setInput('');
-    setTimeout(() => {
-      const reply = fakeCoachReply(userMsg.text);
-      setMessages(prev => [...prev, { role: 'coach', text: reply }]);
-    }, 450);
+    setIsSending(true);
+    // add typing indicator bubble first
+    const coachTyping = { role: 'coach', typing: true, id: Date.now() };
+    typingIdRef.current = coachTyping.id;
+    setMessages(prev => [...prev, coachTyping]);
+    try {
+      const reply = await askBackend(text);
+      // after we have reply, type it out in the same bubble
+      await typeOut(reply, typingIdRef.current);
+    } catch (err) {
+      setMessages(prev => prev.map(m => (m.id === typingIdRef.current ? { ...m, typing: false, text: `Error: ${err.message}` } : m)));
+    } finally {
+      typingIdRef.current = null;
+      setIsSending(false);
+    }
   };
 
   const handleKey = (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } };
@@ -65,7 +102,17 @@ const ChatAI = () => {
               )}
               <div className={`msg-bubble ${isUser ? 'user' : 'coach'}`}> 
                 <div className="meta">{isUser ? 'Kamu' : 'Coach Chad'}</div>
-                <div className="text">{m.text}</div>
+                <div className="text">
+                  {m.typing ? (
+                    <span className="typing">
+                      <span className="dot" />
+                      <span className="dot" />
+                      <span className="dot" />
+                    </span>
+                  ) : (
+                    m.text
+                  )}
+                </div>
               </div>
               {isUser && (
                 <div className="avatar user-initial" aria-hidden="true">🧑‍💪</div>
@@ -82,7 +129,7 @@ const ChatAI = () => {
           placeholder="Tulis pertanyaan kamu... (Enter untuk kirim, Shift+Enter baris baru)"
         />
         <div className="chat-actions">
-          <button className="send-btn" onClick={sendMessage} disabled={!input.trim()}>Kirim</button>
+          <button className="send-btn" onClick={sendMessage} disabled={!input.trim() || isSending}>{isSending ? 'Mengirim...' : 'Kirim'}</button>
         </div>
         <div className="suggestions" aria-label="Saran prompt">
           {promptSuggestions.map(p => (

@@ -2,25 +2,26 @@ import React from 'react';
 import './MissionToday.css';
 
 const MissionToday = () => (
-  <section className="cd-mission" aria-labelledby="mission-title">
-    <div className="cd-mission-header">
-      <h2 id="mission-title">Misi Hari Ini</h2>
-      <span className="cd-date">{new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
+  <section className="cd-mission welcome" aria-labelledby="mission-title">
+    <div className="cd-welcome-card no-actions">
+      <div className="avatar-col">
+        <div className="avatar-frame flat">
+          <img
+            className="chad-avatar large"
+            src="/assets/img/chad_pp2.png"
+            alt="Coach Chad"
+          />
+        </div>
+      </div>
+      <div className="welcome-content">
+        <div className="welcome-text-group">
+          <h2 id="mission-title">Selamat datang — Saya Coach Chad</h2>
+          <p className="lead">
+            Selamat datang di Chad.AI. Hari ini fokus kita pada disiplin, teknik, dan progres bertahap. Saya bantu koreksi gerakan, susun misi harian, serta memberi saran nutrisi & motivasi. Jalani hari ini dengan fokus dan konsisten — saya di sini menemani progresmu.
+          </p>
+        </div>
+      </div>
     </div>
-    <ul className="cd-mission-list">
-      <li>
-        <h3>Latihan Kekuatan 45 Menit</h3>
-        <p>Fokus: Compound lifts (squat, deadlift, bench).</p>
-      </li>
-      <li>
-        <h3>Belajar / Deep Work 2 Jam</h3>
-        <p>Kerjakan modul lanjutan strategi AI dan catat insight.</p>
-      </li>
-      <li>
-        <h3>Refleksi Malam 10 Menit</h3>
-        <p>Tinjau disiplin & tulis 1 pelajaran terbesar hari ini.</p>
-      </li>
-    </ul>
   </section>
 );
 

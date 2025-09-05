@@ -11,3 +11,22 @@
 .cd-mission-list h3{margin:0 0 6px;font-size:1rem;font-weight:600;}
 .cd-mission-list p{margin:0;font-size:.85rem;color:var(--cd-text-dim);line-height:1.3;}
 @media(max-width:720px){.cd-mission{padding:24px 22px 26px;} .cd-mission-list{gap:14px;} }
+
+/* Welcome variant */
+.cd-mission.welcome{background:linear-gradient(180deg,rgba(26,30,32,0.65),rgba(17,19,20,0.72));border:1px solid rgba(255,255,255,0.04);padding:28px 34px 30px;border-radius:18px;color:var(--cd-text);box-shadow:0 8px 28px -8px rgba(0,0,0,.55);}
+.cd-welcome-card{display:grid;grid-template-columns:160px 1fr;gap:40px;align-items:center;width:100%;}
+.cd-welcome-card.no-actions{grid-template-columns:200px 1fr;}
+.avatar-col{display:flex;justify-content:center;align-items:center;}
+.avatar-frame{width:160px;height:160px;border-radius:18px;background:linear-gradient(145deg,#272e32,#181c1e);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 0 0 2px rgba(255,204,0,0.08),0 14px 34px -10px rgba(0,0,0,0.65);overflow:hidden;}
+.avatar-frame.flat{background:#1c2123;}
+.avatar-frame:before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,204,0,.18),transparent 55%);mix-blend-mode:overlay;}
+.chad-avatar{width:100%;height:100%;object-fit:cover;filter:grayscale(.05) contrast(1.08) saturate(1.05);} 
+.chad-avatar.large{border-radius:14px;}
+.welcome-content{display:flex;flex-direction:column;gap:18px;}
+.welcome-text-group h2{margin:0 0 10px;color:#fff;font-size:1.35rem;letter-spacing:.7px;line-height:1.25}
+.welcome-text-group .lead{margin:0;color:rgba(230,238,240,0.9);max-width:880px;line-height:1.55;font-size:.98rem;font-weight:400;letter-spacing:.3px}
+/* Buttons removed per request */
+.welcome-actions{display:none}
+@media(max-width:1080px){.cd-welcome-card{grid-template-columns:140px 1fr;gap:34px}.avatar-frame{width:140px;height:140px}.cd-welcome-card.no-actions{grid-template-columns:170px 1fr}}
+@media(max-width:860px){.cd-welcome-card{grid-template-columns:1fr;gap:28px}.avatar-col{justify-content:flex-start}.cd-mission.welcome{padding:26px 26px 28px}}
+@media(max-width:560px){.cd-welcome-card.no-actions{grid-template-columns:1fr}.welcome-text-group h2{font-size:1.08rem}.welcome-text-group .lead{font-size:.9rem}}

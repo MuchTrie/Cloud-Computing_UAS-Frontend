@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import './WorkoutPage.css';
 
 const initialExercises = [
-  { name: 'Squat', sets: 5, reps: 5, weight: 100, done: false },
-  { name: 'Deadlift', sets: 3, reps: 5, weight: 140, done: false },
-  { name: 'Bench Press', sets: 5, reps: 5, weight: 80, done: false }
+  { name: 'Clean Rows', sets: 4, reps: 8, weight: 60, done: false },
+  { name: 'Single-Arm Dumbbell Row', sets: 3, reps: 10, weight: 28, done: false },
+  { name: 'Biceps Curl', sets: 3, reps: 12, weight: 18, done: false },
+  { name: 'Dumbbell Lunge', sets: 3, reps: 10, weight: 20, done: false },
+  { name: 'Abs Circuit (bodyweight)', sets: 3, reps: 20, weight: 0, done: false }
 ];
 
 const WorkoutPage = () => {

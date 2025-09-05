@@ -197,12 +197,12 @@ const Header = () => {
               <span className={`lang-text ${language === 'id' ? 'active' : ''}`}>ID</span>
             </button>
             
-            <button 
+            {/* <button 
               className="btn btn-primary" 
               onClick={() => setIsAuthModalOpen(true)}
             >
               {t('startNow')}
-            </button>
+            </button> */}
           </div>
           {/* Hamburger placed outside so it's still visible when nav-actions buttons hidden on very small screens */}
           <button 

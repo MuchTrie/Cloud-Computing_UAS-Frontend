@@ -7,8 +7,9 @@ import Features from './components/Features/Features';
 import About from './components/About/About';
 import CTA from './components/CTA/CTA';
 import Footer from './components/Footer/Footer';
-import AdminDashboard from './components/Dashboard/AdminDashboard';
-import UserDashboard from './components/Dashboard/UserDashboard';
+// Perbaikan path: file berada dalam subfolder admin/ dan user/
+import AdminDashboard from './components/Dashboard/admin/AdminDashboard';
+import UserDashboard from './components/Dashboard/user/UserDashboard';
 import './App.css';
 
 // Komponen HomePage yang berisi konten halaman utama

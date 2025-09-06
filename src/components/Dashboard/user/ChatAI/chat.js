@@ -18,15 +18,55 @@ const ChatAI = () => {
   const [messages, setMessages] = useState(initialMessages);
   const [input, setInput] = useState('');
   const [isSending, setIsSending] = useState(false);
+  const [showScrollButton, setShowScrollButton] = useState(false);
   const containerRef = useRef(null);
   const typingIdRef = useRef(null);
   const typeTimerRef = useRef(null);
 
   useEffect(() => {
+    // Function to scroll to bottom
+    const scrollChatToBottom = () => {
+      if (containerRef.current) {
+        containerRef.current.scrollTop = containerRef.current.scrollHeight;
+      }
+    };
+    
+    // Scroll setiap kali pesan berubah
+    scrollChatToBottom();
+    
+    // Tambahan: scroll ulang setelah delay singkat untuk mengatasi animasi/render
+    const timeoutId = setTimeout(scrollChatToBottom, 100);
+    
+    return () => clearTimeout(timeoutId);
+  }, [messages]);
+  
+  // Deteksi scroll untuk tombol kembali ke bawah - perbaikan
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      
+      const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+      // Ubah toleransi jadi 20px saja agar lebih sensitif
+      const isScrolledUp = scrollHeight - scrollTop - clientHeight > 20;
+      setShowScrollButton(isScrolledUp);
+    };
+    
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      
+      // Panggil sekali saat mounting untuk set kondisi awal
+      setTimeout(() => handleScroll(), 500);
+      
+      return () => container.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  const scrollToBottom = () => {
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
-  }, [messages]);
+  };
 
   const conversationIdRef = useRef(null);
   if (!conversationIdRef.current) {
@@ -103,6 +143,8 @@ const ChatAI = () => {
         <h1>Tanya Coach Chad</h1>
       </header>
       <div className="chat-body" ref={containerRef} aria-label="Riwayat percakapan">
+        {/* Dummy div di atas untuk padding */}
+        <div style={{ minHeight: '20px' }}></div>
         {messages.map((m,i) => {
           const isUser = m.role === 'user';
           return (
@@ -130,7 +172,20 @@ const ChatAI = () => {
             </div>
           );
         })}
+        {/* Dummy div di bawah untuk padding dan memastikan scroll */}
+        <div style={{ minHeight: '20px' }}></div>
       </div>
+      
+      {showScrollButton && (
+        <button 
+          className="scroll-bottom-btn" 
+          onClick={scrollToBottom}
+          aria-label="Scroll ke bawah"
+        >
+          <span aria-hidden="true">⬇️</span>
+        </button>
+      )}
+      
       <div className="chat-input-area" aria-label="Kirim pesan ke Coach Chad">
         <textarea
           value={input}

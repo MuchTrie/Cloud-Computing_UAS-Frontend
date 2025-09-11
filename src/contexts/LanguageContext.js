@@ -69,7 +69,7 @@ export const translations = {
     potential: 'POTENTIAL',
     
     // Features
-    chadMethod: 'THE CHAD',
+    chadMethod: 'CHAD',
     method: 'METHOD',
     featuresSubtitle: 'Four pillars of transformation. No compromise. No excuses.',
     instantPrecision: 'INSTANT PRECISION',
